@@ -19,6 +19,10 @@ app.get('/test', (req, res) => {
     res.send('testing');
 });
 
+app.get('/profit', (req, res) => {
+    res.render('profit');
+});
+
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
