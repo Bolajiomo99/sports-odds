@@ -11,17 +11,27 @@ app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')))
+
+
 app.get('/', (req, res) => {
     res.render('index');
 });
 
 app.get('/test', (req, res) => {
-    res.send('testing');
+    res.send('nice, you found the testing page, but keep this a secret!  ;) ');
+});
+
+app.get('/donate', (req, res) => {
+    res.render('donate')
 });
 
 app.get('/profit', (req, res) => {
     res.render('profit');
 });
+
+
 
 
 app.all('*', (req, res, next) => {
