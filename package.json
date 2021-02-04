@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  
   "dependencies": {
     "ejs-mate": "^3.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "mongoose": "^5.11.14",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {},
   "scripts": {

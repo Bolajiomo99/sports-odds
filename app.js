@@ -3,7 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
-
+const favicon = require('serve-favicon');
 
 const app = express();
 
@@ -13,6 +13,9 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')))
+
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 
 app.get('/', (req, res) => {
