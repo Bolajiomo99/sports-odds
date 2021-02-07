@@ -34,6 +34,10 @@ app.get('/profit', (req, res) => {
     res.render('profit');
 });
 
+app.get('/city', (req,res) => {
+    res.render('city')
+})
+
 
 
 

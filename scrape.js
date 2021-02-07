@@ -1,28 +1,39 @@
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-const getJSON = function(url, callback) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      const status = xhr.status;
-      if (status === 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status, xhr.response);
-      }
-    };
-    xhr.send();
+const { PythonShell } = require('python-shell');
+
+// const spawn = require("child_process").spawn;
+// const pythonProcess = spawn('python',["public/python/scrape.py"]);
+// pythonProcess.stdout.on('data', (data) => {
+//     console.log(data)
+// });
+
+let options = {
+    mode: 'text',
+    pythonPath: 'python',
+    pythonOptions: ['-u'], // get print results in real-time
+    scriptPath: './public/python/scrape.py',
+    args: ['arg1', 'arg2']
 };
 
-
-
-getJSON('https://api.gambitprofit.com/gambit-plays?_sort=PlayDate:DESC',
-function(err, data) {
-  if (err !== null) {
-    console.log('Something went wrong: ' + err);
-  } else {
-    console.log('Your query count: ' +  data);
-  }
+PythonShell.run('scrape.py', options, function(err, results) {
+    if (err) console.log(err);
+    // results is an array consisting of messages collected during execution
+    console.log('results: %j', results);
 });
 
+
+
+// PythonShell.run('python', ['scrape.py'])
+
+
+
+// let options = {
+//     pythonPath: './public/python/',
+//   };
+
+//   let {PythonShell} = require('python-shell')
+//   PythonShell.run('scrape.py', options,  function  (err, results)  {
+//    if  (err)  throw err;
+//    console.log('test.py finished.');
+//    console.log('results', results);
+//   });
