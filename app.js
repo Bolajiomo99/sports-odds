@@ -14,6 +14,12 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    // res.locals.success = req.flash('success');
+    // res.locals.error = req.flash('error');
+    next();
+})
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
@@ -21,6 +27,16 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.get('/', (req, res) => {
     res.render('index');
 });
+
+app.get('/register', (req, res) => {
+    const { username = 'Annaymous' } = req.query;
+    req.session.username = username;
+
+});
+
+app.get('/gamestoday', (req, res) => {
+    res.render('gameoutput')
+})
 
 app.get('/test', (req, res) => {
     res.send('nice, you found the testing page, but keep this a secret!  ;) ');
@@ -33,6 +49,8 @@ app.get('/donate', (req, res) => {
 app.get('/profit', (req, res) => {
     res.render('profit');
 });
+
+
 
 app.get('/city', (req,res) => {
     res.render('city')
