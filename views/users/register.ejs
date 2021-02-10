@@ -10,13 +10,18 @@
 <body>
     <h1>SIGN UP!</h1>
     <form action="/register" method="POST">
+        <div class="mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" required>
+        </div>
+
         <div>
             <label for="username">Enter Username:</label>
-            <input type="text" name="username" id="username" placeholder="username">
+            <input type="text" name="username" id="username" placeholder="username" required>
         </div>
         <div>
             <label for="password">Enter password:</label>
-            <input type="password" name="password" id="password" placeholder="password">
+            <input type="password" name="password" id="password" placeholder="password" required>
         </div>
         <button>Sign Up</button>
     </form>

@@ -5,7 +5,9 @@ const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const favicon = require('serve-favicon');
 const User = require('./models/user');
-
+const bcrypt = require('bcrypt');
+const flash = require('connect-flash');
+const MongoDBStore = require("connect-mongo")(session);
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/gambitgames';
 // const dbUrl = 'mongodb://localhost:27017/yelp-camp'
@@ -36,8 +38,36 @@ app.set('views', [path.join(__dirname, 'views'),
     path.join(__dirname, 'views/layouts/'),   
         ]);
 
+const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
+const store = new MongoDBStore({
+    url: dbUrl,
+    secret,
+    touchAfter: 24*60*60
+});
+
+
+const sessionConfig = {
+    store,
+    name: 'session',
+    secret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        // secure: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+
+app.use(session(sessionConfig));
+app.use(flash());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')))
+store.on("error", function(e){
+    console.log('session store error', e)
+})
+
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
@@ -45,6 +75,7 @@ app.use((req, res, next) => {
     // res.locals.error = req.flash('error');
     next();
 })
+
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
@@ -64,32 +95,42 @@ app.get('/', (req, res) => {
 app.get('/register', (req, res) => {
 //     const { username = 'Annaymous' } = req.query;
 //     req.session.username = username;
-    res.render('users/register')
+    res.render('register')
 })
 
 app.post('/register', async (req, res) => {
     const { password, username } = req.body;
-    const user = new User({ username, password })
+    // const hash = awa
+    const user = new User({ 
+        username, 
+        password })
     await user.save();
-    req.session.user_id = user._id;
+    console.log(user)
+    // req.session.user_id = user._id;
     res.redirect('/')
+    
 })
 
 app.get('/login', (req, res) => {
-    res.render('users/login')
+    res.render('login')
 })
 
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
+    // res.send(req.body)
+    try{
     const foundUser = await User.findAndValidate(username, password);
-    if (foundUser) {
-        req.session.user_id = foundUser._id;
-        res.redirect('/gameoutput');
+        if (foundUser) {
+            // req.session.user_id = foundUser._id;
+            res.send('it works');
+        }
+
+    }catch (e){
+        req.flash('error', e.message)
+        res.redirect('login')
     }
-    else {
-        res.redirect('users/login')
-    }
+    
 })
 
 app.post('/logout', (req, res) => {
