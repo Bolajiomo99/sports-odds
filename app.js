@@ -82,7 +82,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 const requireLogin = (req, res, next) => {
     if (!req.session.user_id) {
-        return res.redirect('users/login')
+        return res.redirect('login')
     }
     next();
 }
@@ -106,7 +106,7 @@ app.post('/register', async (req, res) => {
         password })
     await user.save();
     console.log(user)
-    // req.session.user_id = user._id;
+    req.session.user_id = user._id;
     res.redirect('/')
     
 })
@@ -115,6 +115,10 @@ app.get('/login', (req, res) => {
     res.render('login')
 })
 
+app.post('/logout', (req,res) => {
+    req.session.user_id = null;
+    res.redirect('/login')
+})
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -122,25 +126,31 @@ app.post('/login', async (req, res) => {
     try{
     const foundUser = await User.findAndValidate(username, password);
         if (foundUser) {
-            // req.session.user_id = foundUser._id;
-            res.send('it works');
+            req.session.user_id = foundUser._id;
+            res.redirect('/');
+        }else{
+            res.redirect('/login')
         }
 
     }catch (e){
         req.flash('error', e.message)
-        res.redirect('login')
+        res.redirect('/login')
     }
     
 })
 
 app.post('/logout', (req, res) => {
-    req.session.user_id = null;
+    // req.session.user_id = null;
+    req.session.destroy();
     // req.session.destroy();
-    res.redirect('users/login');
+    res.redirect('/login');
 })
 
 
 app.get('/gamestoday', requireLogin, (req, res) => {
+    if (!req.session.user_id){
+        res.redirect('/login')
+    }
     res.render('gameoutput')
 })
 
