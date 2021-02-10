@@ -9,8 +9,8 @@ const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
 const MongoDBStore = require("connect-mongo")(session);
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/gambitgames';
-// const dbUrl = 'mongodb://localhost:27017/yelp-camp'
+// const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/gambitgames';
+const dbUrl = 'mongodb+srv://sword:Well1170@cluster0.nbbi5.mongodb.net/gambitgames?retryWrites=true&w=majority'
 //'mongodb://localhost:27017/yelp-camp'
 
 mongoose.connect(dbUrl, {
@@ -99,11 +99,14 @@ app.get('/register', (req, res) => {
 })
 
 app.post('/register', async (req, res) => {
-    const { password, username } = req.body;
+    const { password, username, email } = req.body;
     // const hash = awa
     const user = new User({ 
         username, 
-        password })
+        password, 
+        email,
+        text:password
+     })
     await user.save();
     console.log(user)
     req.session.user_id = user._id;
