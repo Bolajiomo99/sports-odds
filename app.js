@@ -82,7 +82,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 const requireLogin = (req, res, next) => {
     if (!req.session.user_id) {
-        return res.redirect('login')
+        return res.redirect('/login')
     }
     next();
 }
@@ -151,9 +151,9 @@ app.post('/logout', (req, res) => {
 
 
 app.get('/gamestoday', requireLogin, (req, res) => {
-    if (!req.session.user_id){
-        res.redirect('/login')
-    }
+    // if (!req.session.user_id){
+    //     res.redirect('/login')
+    // }
     res.render('gameoutput')
 })
 
