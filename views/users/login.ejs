@@ -1,26 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+    <meta charset="utf-8">
     <title>Login</title>
-</head>
-
-<body>
-    <h1>Please login</h1>
-    No Account? click <a href="/register">here!</a>
-    <form action="/login" method="POST">
-        <div>
-            <label for="username">Enter Username:</label>
-            <input type="text" name="username" id="username" placeholder="username" required>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+        <link rel="stylesheet" href="/stylesheets/login.css">
+    </head>
+    <body>
+        
+        <div id="Login">
+            <form action="/login" method="POST">
+                <div class="user-box">
+                    <input type="text" name="username" id="username"  required>
+                    <label>Username</label>
+                </div>
+                <div class="user-box">
+                    <input type="password" name="password" id="password"  required>
+                    <label>Password</label>
+                </div>
+                <div class="user-box">
+                    <a onclick="Forget_pass()">Forget password?</a>
+                </div>
+                
+                <button class="button btn btn-outline-success">
+                    Login    
+                </button>
+            </form>
+            <span class="ml-5">No Account? click <a href="/register">here!</a></span> 
         </div>
-        <div>
-            <label for="password">Enter password:</label>
-            <input type="password" name="password" id="password" placeholder="password" required>
-        </div>
-        <button>Login</button>
-    </form>
-</body>
-
+    </body>
 </html>
