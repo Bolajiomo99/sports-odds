@@ -1,8 +1,11 @@
+import JSSoup from 'jssoup';
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const random = require("request");
 const JSON = require("json");
-
 const request = new XMLHttpRequest()
+
+// nodejs
+const JSSoup = require('jssoup').default;
 
 // request.open('GET', 'https://ghibliapi.herokuapp.com/films', true)
 // request.onload = function () {
