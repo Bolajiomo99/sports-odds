@@ -1,0 +1,5 @@
+@import 'https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/yeti/bootstrap.min.css';
+
+label {
+  cursor: pointer;
+}
