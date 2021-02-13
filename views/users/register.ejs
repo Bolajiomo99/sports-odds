@@ -2,29 +2,66 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/register.css">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
 </head>
 
 <body>
-    <h1>SIGN UP!</h1>
-    <form action="/register" method="POST">
-        <div class="mb-3">
-            <label class="form-label" for="email">Email</label>
-            <input class="form-control" type="email" id="email" name="email" required>
-        </div>
 
-        <div>
-            <label for="username">Enter Username:</label>
-            <input type="text" name="username" id="username" placeholder="username" required>
+
+    <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card shadow my-5">
+              <h4 class="card-header">Register</h4>
+              <div class="card-body">
+                <form action="/register" method="POST">
+                  <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" class="form-control border" required>
+                    <small class="form-text text-danger feedback"></small>
+                  </div>
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" class="form-control border" required>
+                    
+                </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control border" autocomplete="off" required>
+                    <small class="form-text text-danger feedback"></small>
+                  </div>
+                  <div class="form-group">
+                    <label for="confirmPassword">Confirm password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control border" autocomplete="off" required>
+                    <small class="form-text text-danger feedback"></small>
+                  </div>
+                  <div class="custom-control custom-switch mb-3">
+                    <input type="checkbox" class="custom-control-input" id="showPassword" name="showPassword">
+                    <label class="custom-control-label" for="showPassword">Show password</label>
+                  </div>
+                  
+                  <button type="submit" class="button btn btn-outline-success" name="btn">
+                    Sign up    
+                </button>
+                  
+                </form>
+                <a href="/login">Already have an account?</a>
+              </div>
+              <div class="card-footer"></div>
+            </div>
+          </div>
         </div>
-        <div>
-            <label for="password">Enter password:</label>
-            <input type="password" name="password" id="password" placeholder="password" required>
-        </div>
-        <button>Sign Up</button>
-    </form>
+      </div>
+
 </body>
 
+<script type="text/javascript" src="/javascripts/register.js"></script>
+
 </html>
+

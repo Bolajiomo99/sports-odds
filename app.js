@@ -35,7 +35,8 @@ app.set('view engine', 'ejs');
 app.set('views', [path.join(__dirname, 'views'),
     path.join(__dirname, 'views/users/'),
     path.join(__dirname, 'views/partials/'),
-    path.join(__dirname, 'views/layouts/'),   
+    path.join(__dirname, 'views/layouts/'),
+    path.join(__dirname, 'public/javascripts/'),  
         ]);
 
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
