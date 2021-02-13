@@ -1,14 +1,14 @@
 const [form] = document.forms;
 const [
-  nameFeedback,
   emailFeedback,
+  usernameFeedback,
   passwordFeedback,
   confirmPasswordFeedback
 ] = document.querySelectorAll('.feedback');
 
-const isNameValid = name => {
-  return name.length > 3 && name.length <= 20 && /^[A-Za-z0-9_ ]*$/g.test(name);
-}
+// const isNameValid = name => {
+//   return name.length > 3 && name.length <= 20 && /^[A-Za-z0-9_ ]*$/g.test(name);
+// }
 
 const isEmailValid = email => {
   return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g.test(email);
@@ -22,9 +22,8 @@ const isPasswordMatch = (password, confirmPassword) => {
   return !!confirmPassword && password === confirmPassword;
 }
 
-const validation = (name, email, password, confirmPassword) => {
+const validation = (email, password, confirmPassword) => {
   return (
-    isNameValid(name) &&
     isEmailValid(email) &&
     isPasswordValid(password) &&
     isPasswordMatch(password, confirmPassword)
@@ -41,10 +40,6 @@ const toggleShowPassword = (toggler, elements) => {
 
 const getElement = (name, e) => {
   return {
-    name(e) {
-      e.target.classList.toggle('border-danger', !isNameValid(e.target.value));
-      nameFeedback.textContent = isNameValid(e.target.value) ? null : 'Name must be at least 3 to 20 characters long and contain only alphabet, number, underscore and white space';
-    },
     email(e) {
       e.target.classList.toggle('border-danger', !isEmailValid(e.target.value));
       emailFeedback.textContent = isEmailValid(e.target.value) ? null : 'Provide a valid email address';
@@ -64,18 +59,18 @@ const getElement = (name, e) => {
 }
 
 const handleInput = e => {
-  const { name: formName, email, password, confirmPassword, btn } = form;
+  const { name:  email, password, confirmPassword, btn } = form;
   const { name } = e.target;
   
   getElement(name, e);
   
-  btn.disabled = !validation(formName.value, email.value, password.value, confirmPassword.value);
+  btn.disabled = !validation(email.value, password.value, confirmPassword.value);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   toggleShowPassword(form.showPassword, [form.password, form.confirmPassword]);
   
-  form.name.addEventListener('input', handleInput);
+//   form.name.addEventListener('input', handleInput);
 
   form.email.addEventListener('input', handleInput);
 
@@ -85,9 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const { name, email, password, confirmPassword } = e.target;
+    const { email, password, confirmPassword } = e.target;
     const submittedValue = {
-      name: name.value,
+    //   name: name.value,
       email: email.value,
       password: password.value,
       confirmPassword: confirmPassword.value
