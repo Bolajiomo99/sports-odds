@@ -99,6 +99,10 @@ app.get('/register', (req, res) => {
     res.render('register')
 })
 
+app.get('/forgotpassword', (req, res) => {
+    res.render('forgotpassword')
+})
+
 app.post('/register', async (req, res) => {
     const { password, username, email } = req.body;
     // const hash = awa
