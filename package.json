@@ -8,16 +8,20 @@
     "connect-flash": "^0.1.1",
     "connect-mongo": "^3.2.0",
     "ejs-mate": "^3.0.0",
+    "email-verification": "^0.4.6",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "json": "^10.0.0",
     "jssoup": "0.0.12",
     "mongoose": "^5.11.15",
+    "nodemailer": "^6.4.18",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "python-shell": "^2.0.3",
     "serve-favicon": "^2.5.0",
-    "xmlhttprequest": "^1.8.0"
+    "twilio": "^3.56.0",
+    "xmlhttprequest": "^1.8.0",
+    "xoauth2": "^1.2.0"
   },
   "devDependencies": {},
   "scripts": {
