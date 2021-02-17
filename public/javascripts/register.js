@@ -61,7 +61,7 @@ const getElement = (name, e) => {
 const handleInput = e => {
   const { name:  email, password, confirmPassword, btn } = form;
   const { name } = e.target;
-  
+  console.log(name)
   getElement(name, e);
   
   // btn.disabled = !validation(email.value, password.value, confirmPassword.value);
