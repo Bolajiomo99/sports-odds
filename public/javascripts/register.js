@@ -64,7 +64,7 @@ const handleInput = e => {
   
   getElement(name, e);
   
-  btn.disabled = !validation(email.value, password.value, confirmPassword.value);
+  // btn.disabled = !validation(email.value, password.value, confirmPassword.value);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
