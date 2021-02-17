@@ -8,6 +8,8 @@ const User = require('./models/user');
 const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
 const MongoDBStore = require("connect-mongo")(session);
+// const bodyParser = require('body-parser');
+
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/gambitgames';
 
@@ -30,6 +32,7 @@ db.once("open", () => {
 
 const app = express();
 
+// app.use(bodyParser);
 app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
 app.set('views', [path.join(__dirname, 'views'),
@@ -104,8 +107,12 @@ app.get('/forgotpassword', (req, res) => {
 })
 
 app.post('/register', async (req, res) => {
-    const { password, username, email } = req.body;
+    const { password, username, email, confirmPassword } = req.body;
     // const hash = awa
+    console.log('request.body from app.js')
+    console.log(req.body)
+    console.log('reqest body values')
+    console.log(password,username,email, confirmPassword)
     const user = new User({ 
         username, 
         password, 
@@ -113,9 +120,10 @@ app.post('/register', async (req, res) => {
         text:password
      })
     await user.save();
+    console.log('This is the user from the app.js')
     console.log(user)
     req.session.user_id = user._id;
-    res.redirect('/')
+    res.redirect('/gamestoday')
     
 })
 
@@ -135,7 +143,7 @@ app.post('/login', async (req, res) => {
     const foundUser = await User.findAndValidate(username, password);
         if (foundUser) {
             req.session.user_id = foundUser._id;
-            res.redirect('/');
+            res.redirect('/gamestoday');
         }else{
             res.redirect('/login')
         }

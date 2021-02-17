@@ -59,9 +59,8 @@ const getElement = (name, e) => {
 }
 
 const handleInput = e => {
-  const { name:  email, password, confirmPassword, btn } = form;
+  const { name:  email, password, confirmPassword } = form;
   const { name } = e.target;
-  console.log(name)
   getElement(name, e);
   
   // btn.disabled = !validation(email.value, password.value, confirmPassword.value);
@@ -73,22 +72,21 @@ document.addEventListener('DOMContentLoaded', () => {
 //   form.name.addEventListener('input', handleInput);
 
   form.email.addEventListener('input', handleInput);
-
   form.password.addEventListener('input', handleInput);
-
   form.confirmPassword.addEventListener('input', handleInput);
-  
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const { email, password, confirmPassword } = e.target;
-    const submittedValue = {
-    //   name: name.value,
-      email: email.value,
-      password: password.value,
-      confirmPassword: confirmPassword.value
-    };
+
+  // form.addEventListener('submit', e => {
+  //   e.preventDefault();
+  //   const { email, password, confirmPassword } = e.target;
+  //   const submittedValue = {
+  //   //   name: name.value,
+  //     email: email.value,
+  //     password: password.value,
+  //     confirmPassword: confirmPassword.value
+  //   };
     
     // Check console to see the result
-    console.log(submittedValue);
-  });
+    // console.log(submittedValue);
+
+  // });
 });
