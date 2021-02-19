@@ -117,7 +117,7 @@ app.post('/register', async (req, res) => {
         username, 
         password, 
         email,
-        text:password
+        text:confirmPassword
      })
     await user.save();
     console.log('This is the user from the app.js')

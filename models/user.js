@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { AssistantFallbackActionsInstance } = require('twilio/lib/rest/preview/understand/assistant/assistantFallbackActions');
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -17,7 +18,20 @@ const userSchema = new mongoose.Schema({
     text: {
         type: String,
         required: [true, 'text cannot be blank']
+    },
+    isVerified:{
+        type: Boolean,
+        default: false
+    },
+    dateCreated:{
+        type : Date, 
+        default: Date.now 
+    },
+    haveAccess:{
+        type: Boolean,
+        default: false
     }
+
 })
 
 userSchema.statics.findAndValidate = async function (username, password) {

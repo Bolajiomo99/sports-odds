@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   toggleShowPassword(form.showPassword, [form.password, form.confirmPassword]);
   
 //   form.name.addEventListener('input', handleInput);
-
+  
   form.email.addEventListener('input', handleInput);
   form.password.addEventListener('input', handleInput);
   form.confirmPassword.addEventListener('input', handleInput);
