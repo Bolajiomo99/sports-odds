@@ -139,22 +139,28 @@ app.post('/logout', (req,res) => {
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     console.log(req.body)
-    const validateuser = await User.findAndValidate(username,password);
-    console.log('is it')
-    console.log(validateuser)
+    
+    
 
     try{
+        const validateuser = await User.findAndValidate(username,password);
+        console.log('validate user console log')
+        console.log(validateuser)
     // const foundUser = await User.findAndValidate(username, password);
         if (validateuser) {
             console.log(validateuser)
             req.session.user_id = validateuser._id;
             res.redirect('/gamestoday');
         }else{
+            console.log('This should flash invalid/username/password')
+            // req.flash('notify', 'Invalid username/pw')
             res.redirect('/login')
         }
 
     }catch (e){
-        req.flash('error', e.message)
+        // req.flash('error', e.message)
+        console.log('This should flash Non existant username')
+        // req.flash('notify', 'None existent username/pw')
         res.redirect('/login')
     }
     
