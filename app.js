@@ -138,11 +138,16 @@ app.post('/logout', (req,res) => {
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    // res.send(req.body)
+    console.log(req.body)
+    const validateuser = await User.findAndValidate(username,password);
+    console.log('is it')
+    console.log(validateuser)
+
     try{
-    const foundUser = await User.findAndValidate(username, password);
-        if (foundUser) {
-            req.session.user_id = foundUser._id;
+    // const foundUser = await User.findAndValidate(username, password);
+        if (validateuser) {
+            console.log(validateuser)
+            req.session.user_id = validateuser._id;
             res.redirect('/gamestoday');
         }else{
             res.redirect('/login')
