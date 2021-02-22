@@ -9,7 +9,9 @@ const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
 const MongoDBStore = require("connect-mongo")(session);
 // const bodyParser = require('body-parser');
+const serverless = require('serverless-http')
 
+const router = express.router();
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/gambitgames';
 
@@ -217,3 +219,8 @@ const port = process.env.PORT || 4000;
 app.listen(port, () => {
     console.log('Serving on port 4000')
 })
+
+
+
+
+module.exports.handler = serverless(app)
