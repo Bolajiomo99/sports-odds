@@ -39,6 +39,7 @@ app.set('views', [path.join(__dirname, 'views'),
     path.join(__dirname, 'views/users/'),
     path.join(__dirname, 'views/partials/'),
     path.join(__dirname, 'views/layouts/'),
+    path.join(__dirname, 'views/sports/'),
     path.join(__dirname, 'public/javascripts/'),  
         ]);
 
@@ -104,6 +105,10 @@ app.get('/register', (req, res) => {
 
 app.get('/forgotpassword', (req, res) => {
     res.render('forgotpassword')
+})
+
+app.get('/nba', (req,res) => {
+    res.render('nba')
 })
 
 app.post('/register', async (req, res) => {
