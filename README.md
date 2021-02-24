@@ -16,13 +16,14 @@ This is a web app that gives live NBA odds data with game upsets featured on Gam
 
 
 
-## Resources:
+## What is the website for?:
 
 * [Swagbucks](https://www.swagbucks.com/profile/asndragoon)
 
 * [Gambit](https://api-production.gambitrewards.com/social_media?referral_code=8d79e51ff63c) 
 
-
+## Why?:
+* Swagbucks features points that you can redeem, with these points you can redeem for gambit and achieve daily goals.
 
 ## Authors:
 
