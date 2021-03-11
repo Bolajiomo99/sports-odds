@@ -16,12 +16,12 @@ nev.configure({
     transportOptions: {
         service: 'Gmail',
         auth: {
-            user: 'gambitprofit.com',
+            user: 'gambitprofit@gmail.com',
             pass: 'GambitGames1!'
         }
     },
     verifyMailOptions: {
-        from: 'Do Not Reply <gambitprofit.com>',
+        from: 'Do Not Reply <gambitprofit@gmail.com>',
         subject: 'Please confirm account',
         html: 'Click the following link to confirm your account:</p><p>${URL}</p>',
         text: 'Please confirm your account by clicking the following link: ${URL}'

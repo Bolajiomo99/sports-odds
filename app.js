@@ -9,11 +9,13 @@ const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
 const MongoDBStore = require("connect-mongo")(session);
 // const bodyParser = require('body-parser');
-
-
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/gambitgames';
-
+require('dotenv').config();
 //'mongodb://localhost:27017/yelp-camp'
+
+
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
@@ -32,6 +34,12 @@ db.once("open", () => {
 
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+const route = express.Router();
+app.use('/v1', route);
+
+
 // app.use(bodyParser);
 app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
@@ -48,6 +56,16 @@ const store = new MongoDBStore({
     url: dbUrl,
     secret,
     touchAfter: 24*60*60
+});
+
+const transporter = nodemailer.createTransport({
+    port: 465,               // true for 465, false for other ports
+    host: "smtp.gmail.com",
+       auth: {
+            user: process.env.GAMBIT_EMAIL,
+            pass: process.env.GAMBIT_PASS,
+         },
+    secure: true,
 });
 
 
@@ -103,13 +121,48 @@ app.get('/register', (req, res) => {
     res.render('register')
 })
 
+makepass=(length) => {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
+
+ 
 app.get('/forgotpassword', (req, res) => {
     res.render('forgotpassword')
 })
 
+app.post('/forgotpassword', async (req, res) => {
+    const { email } = req.body;
+    console.log('the email is')
+    console.log(email)
+    temppass = makepass(12)
+
+    const mailOptions = {
+        from: 'gambitprofit@gmail.com',  // sender address
+            to: email,   // list of receivers
+            subject: "Here's your Temporary password",
+            text: 'Gambit Games',
+            html: `<b>Hey there! Your Temporary Password is ${temppass}<br/>`,
+        };
+
+    transporter.sendMail(mailOptions, function(err, info) {
+        if(err)
+            console.log(err)
+        else
+            console.log(info);
+        });
+})
+
+
 app.get('/nba', (req,res) => {
     res.render('nba')
 })
+
 
 app.post('/register', async (req, res) => {
     const { password, username, email, confirmPassword } = req.body;
@@ -132,6 +185,8 @@ app.post('/register', async (req, res) => {
     
 })
 
+
+
 app.get('/login', (req, res) => {
     res.render('login')
 })
@@ -144,7 +199,6 @@ app.post('/logout', (req,res) => {
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     console.log(req.body)
-    
     
     try{
         const validateuser = await User.findAndValidate(username,password);
