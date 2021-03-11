@@ -16,8 +16,8 @@ nev.configure({
     transportOptions: {
         service: 'Gmail',
         auth: {
-            user: 'gambitprofit@gmail.com',
-            pass: 'GambitGames1!'
+            user: process.env.GAMBIT_EMAIL,
+            pass: process.env.GAMBIT_PASS
         }
     },
     verifyMailOptions: {
