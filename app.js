@@ -146,7 +146,6 @@ app.post('/login', async (req, res) => {
     console.log(req.body)
     
     
-
     try{
         const validateuser = await User.findAndValidate(username,password);
         console.log('validate user console log')
