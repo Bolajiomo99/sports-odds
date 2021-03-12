@@ -32,11 +32,11 @@ const transporter = nodemailer.createTransport({
 
 
 const mailOptions = {
-    from: 'gambitprofit@gmail.com',  // sender address
+    from: 'gambitgames@gmail.com',  // sender address
         to: 'asndragoon@yahoo.com',   // list of receivers
         subject: 'Sending Email using Node.js',
         text: 'That was easy!',
-        html: '<b>Hey there! </b>     <br> Your Temporary Password is<br/>',
+        html: '<b>Hey there! </b>     <br> Your Temporary Password is Go f yourself<br/>',
     };
 
 

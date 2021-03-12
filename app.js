@@ -149,13 +149,14 @@ app.post('/forgotpassword', async (req, res) => {
             text: 'Gambit Games',
             html: `<b>Hey there! Your Temporary Password is ${temppass}<br/>`,
         };
-
+    success = 'Email Sent! If your email exists, you will be given a temporary password.'
     transporter.sendMail(mailOptions, function(err, info) {
         if(err)
             console.log(err)
         else
             console.log(info);
         });
+    // res.redirect('/forgotpassword')
 })
 
 
