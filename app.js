@@ -214,7 +214,7 @@ app.post('/login', async (req, res) => {
             // req.flash('notify', 'Invalid username/pw')
             res.redirect('/login')
         }
-
+        
     }catch (e){
         // req.flash('error', e.message)
         console.log('This should flash Non existant username')
