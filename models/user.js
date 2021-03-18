@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
     haveAccess:{
         type: Boolean,
         default: false
+    },
+    passwordLastModified:{
+        type: Date,
+        default: Date.now
     }
 
 })
@@ -39,6 +43,19 @@ userSchema.statics.findAndValidate = async function (username, password) {
     const isValid = await bcrypt.compare(password, foundUser.password);
     return isValid ? foundUser : false;
 }
+
+
+userSchema.statics.findAndUpdatePW = async function (email){
+    const foundUser = await this.findOne({email});
+    
+    
+    
+    //Need to update password.
+    // console.log(foundUser)
+    return foundUser
+
+}
+
 
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();

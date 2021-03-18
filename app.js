@@ -141,7 +141,25 @@ app.post('/forgotpassword', async (req, res) => {
     console.log('the email is')
     console.log(email)
     temppass = makepass(12)
+    try{
+        
+        const foundUser = await User.findAndUpdatePW(email)
+        if (foundUser){
+            
+            const query = { email: email};
+            const password = await bcrypt.hash(temppass, 12)
+            const newValues = { $set: {password: password, text: temppass , passwordLastModified: Date.now} };
+            db.collection("users").updateOne(query, newValues, function(err,res) {
+                if (err) throw err;
+                console.log("1 document updated");
+            })
+            console.log(foundUser)
 
+        }
+        
+    } catch(e){
+        console.log(e)
+    }
     const mailOptions = {
         from: 'gambitprofit@gmail.com',  // sender address
             to: email,   // list of receivers
