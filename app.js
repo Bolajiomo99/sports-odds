@@ -144,6 +144,7 @@ app.post('/forgotpassword', async (req, res) => {
     try{
         
         const foundUser = await User.findAndUpdatePW(email)
+        // If User is found from the database, then attempt to update the password.
         if (foundUser){
             
             const query = { email: email};
@@ -154,26 +155,34 @@ app.post('/forgotpassword', async (req, res) => {
                 console.log("1 document updated");
             })
             console.log(foundUser)
+            
+            //Prepares the message Body
+            const mailOptions = {
+                from: 'gambitprofit@gmail.com',  // sender address
+                    to: email,   // list of receivers
+                    subject: "Here's your Temporary password",
+                    text: 'Gambit Games',
+                    html: `<b>Hey there! Your Temporary Password is ${temppass}<br/>`,
+                };
 
+            //Sends the message
+            transporter.sendMail(mailOptions, function(err, info) {
+                if(err)
+                    console.log(err)
+                else
+                    console.log(info);
+                });
+
+        }else{
+            //Have to find some ways to display user not found to the main screen
+            console.log("User Not found")
         }
+        
         
     } catch(e){
         console.log(e)
     }
-    const mailOptions = {
-        from: 'gambitprofit@gmail.com',  // sender address
-            to: email,   // list of receivers
-            subject: "Here's your Temporary password",
-            text: 'Gambit Games',
-            html: `<b>Hey there! Your Temporary Password is ${temppass}<br/>`,
-        };
-
-    transporter.sendMail(mailOptions, function(err, info) {
-        if(err)
-            console.log(err)
-        else
-            console.log(info);
-        });
+    
 })
 
 
