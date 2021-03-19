@@ -59,15 +59,15 @@ const store = new MongoDBStore({
 });
 
 const transporter = nodemailer.createTransport({
-    port: 465,               // true for 465, false for other ports
+    port: 587,               // true for 465, false for other ports
     host: "smtp.gmail.com",
        auth: {
             user: process.env.GAMBIT_EMAIL,
             pass: process.env.GAMBIT_PASS,
          },
     
-    protocol: "ssl",    //port: 587 or 465 (587 for tls, 465 for ssl)
-    secure: true,
+    protocol: "tls",    //port: 587 or 465 (587 for tls, 465 for ssl)
+    // secure: true,
 });
 
 
