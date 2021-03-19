@@ -67,7 +67,7 @@ const transporter = nodemailer.createTransport({
          },
     
     protocol: "ssl",    //port: 587 or 465 (587 for tls, 465 for ssl)
-    secure: true 
+    secure: true,
 });
 
 
