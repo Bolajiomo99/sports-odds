@@ -186,6 +186,11 @@ app.post('/forgotpassword', async (req, res) => {
 })
 
 
+app.get('/changepassword', (req,res) => {
+    res.render('changepassword')
+})
+
+
 app.get('/nba', (req,res) => {
     res.render('nba')
 })
