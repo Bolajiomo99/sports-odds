@@ -173,7 +173,7 @@ app.post('/forgotpassword', async (req, res) => {
                     console.log(info);
                 });
 
-            res.send('password sent')
+            res.send("Password sent to " + email);
         }else{
             //Have to find some ways to display user not found to the main screen
             console.log("User Not found")
