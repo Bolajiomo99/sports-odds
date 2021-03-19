@@ -65,7 +65,8 @@ const transporter = nodemailer.createTransport({
             user: process.env.GAMBIT_EMAIL,
             pass: process.env.GAMBIT_PASS,
          },
-    secure: true,
+    // secure: true,
+    protocol: "tls"
 });
 
 
