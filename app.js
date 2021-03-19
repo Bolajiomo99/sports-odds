@@ -162,7 +162,7 @@ app.post('/forgotpassword', async (req, res) => {
                     to: email,   // list of receivers
                     subject: "Here's your Temporary password",
                     text: 'Gambit Games',
-                    html: `<b>Hey there! Your Temporary Password is ${temppass}<br/>`,
+                    html: `<b>Hi! <br/> Your Temporary Password is ${temppass}<br/>`,
                 };
 
             //Sends the message
