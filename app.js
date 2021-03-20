@@ -58,17 +58,7 @@ const store = new MongoDBStore({
     touchAfter: 24*60*60
 });
 
-const transporter = nodemailer.createTransport({
-    port: 587,               // true for 465, false for other ports
-    host: "smtp.gmail.com",
-       auth: {
-            user: process.env.GAMBIT_EMAIL,
-            pass: process.env.GAMBIT_PASS,
-         },
-    
-    protocol: "tls",    //port: 587 or 465 (587 for tls, 465 for ssl)
-    // secure: true,
-});
+
 
 
 const sessionConfig = {
@@ -145,6 +135,23 @@ app.post('/forgotpassword', async (req, res) => {
     temppass = makepass(12)
     try{
         
+
+        const transporter = nodemailer.createTransport({
+            port: 465,               // true for 465, false for other ports
+            secure: true,
+            host: "smtp.gmail.com",
+            auth: {
+                user: process.env.GAMBIT_EMAIL,
+                pass: process.env.GAMBIT_PASS,
+            },
+            // protocol: "ssl"    //port: 587 or 465 (587 for tls, 465 for ssl)
+            tls: {
+                // do not fail on invalid certs
+                rejectUnauthorized: false
+            }
+        });
+
+
         const foundUser = await User.findAndUpdatePW(email)
         // If User is found from the database, then attempt to update the password.
         if (foundUser){
@@ -169,11 +176,13 @@ app.post('/forgotpassword', async (req, res) => {
 
             //Sends the message
             transporter.sendMail(mailOptions, function(err, info) {
-                if(err)
+                if(err){
                     console.log(err)
-                else
+                }else{
                     console.log(info);
-                });
+                }
+                console.log('Message %s sent: %s', info.messageId, info.response);
+            });
 
             res.send("New Temporary Password sent to " + email);
         }else{
