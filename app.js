@@ -148,8 +148,8 @@ app.post('/forgotpassword', async (req, res) => {
                 user: process.env.GAMBIT_EMAIL,
                 pass: process.env.GAMBIT_PASS,
             },
-            // protocol: "ssl"    //port: 587 or 465 (587 for tls, 465 for ssl)
-            tls: {
+            protocol: "ssl",    //port: 587 or 465 (587 for tls, 465 for ssl)
+            ssl: {
                 // do not fail on invalid certs
                 rejectUnauthorized: false
             }
