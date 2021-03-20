@@ -149,10 +149,10 @@ app.post('/forgotpassword', async (req, res) => {
                 pass: process.env.GAMBIT_PASS,
             },
             // protocol: "ssl"    //port: 587 or 465 (587 for tls, 465 for ssl)
-            tls: {
-                // do not fail on invalid certs
-                rejectUnauthorized: false
-            }
+            // tls: {
+            //     // do not fail on invalid certs
+            //     rejectUnauthorized: false
+            // }
         });
 
 
