@@ -134,7 +134,11 @@ app.post('/forgotpassword', async (req, res) => {
     console.log(email)
     temppass = makepass(12)
     try{
-        
+        print('email:')
+        print(process.env.GAMBIT_EMAIL)
+        print('password')
+        print(process.env.GAMBIT_PASS)
+
 
         const transporter = nodemailer.createTransport({
             port: 465,               // true for 465, false for other ports
