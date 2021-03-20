@@ -133,13 +133,13 @@ app.post('/forgotpassword', async (req, res) => {
     console.log('the email is')
     console.log(email)
     temppass = makepass(12)
+    console.log('email:')
+    console.log(process.env.GAMBIT_EMAIL)
+    console.log('password')
+    console.log(process.env.GAMBIT_PASS)
+
     try{
-        print('email:')
-        print(process.env.GAMBIT_EMAIL)
-        print('password')
-        print(process.env.GAMBIT_PASS)
-
-
+        
         const transporter = nodemailer.createTransport({
             port: 465,               // true for 465, false for other ports
             secure: true,
@@ -148,11 +148,11 @@ app.post('/forgotpassword', async (req, res) => {
                 user: process.env.GAMBIT_EMAIL,
                 pass: process.env.GAMBIT_PASS,
             },
-            protocol: "ssl"    //port: 587 or 465 (587 for tls, 465 for ssl)
-            // tls: {
-            //     // do not fail on invalid certs
-            //     rejectUnauthorized: false
-            // }
+            // protocol: "ssl"    //port: 587 or 465 (587 for tls, 465 for ssl)
+            tls: {
+                // do not fail on invalid certs
+                rejectUnauthorized: false
+            }
         });
 
 
