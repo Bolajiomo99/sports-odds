@@ -21,6 +21,8 @@ This is a web app that gives live NBA odds data with game upsets featured on Gam
 
 * Sports Odds API
 
+* MongoDB
+
 * Google Cloud Platform (Firebase)
 
 ## Additional Features:
