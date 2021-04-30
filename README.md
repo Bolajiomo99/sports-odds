@@ -4,15 +4,14 @@
 This is a web app that gives live NBA odds data with game upsets featured on Gambit that you can access through Swagbucks.
 
 * [Current link](https://gambitprofit-306118.df.r.appspot.com)
-* Previous [heroku](http://gambitgames.herokuapp.com/) link
+* [heroku link](http://gambitgames.herokuapp.com/) 
 
 
 ## Additional Features:
 
 * Gives codes that you can plug into pageprobe that you can check for live odd/spread changes.
-
+* Feature live sports odds using the live sports odds API to track for possible arbitrage
 * go [here](https://gambitprofit-306118.df.r.appspot.com/gamestoday)
-
 
 
 
@@ -22,8 +21,15 @@ This is a web app that gives live NBA odds data with game upsets featured on Gam
 
 * [Gambit](https://api-production.gambitrewards.com/social_media?referral_code=8d79e51ff63c) 
 
+
+## Run the website locally:
+* nodemon app.js
+
+
 ## Why?:
 * Swagbucks features points that you can redeem, with these points you can redeem for gambit and achieve daily goals.
+* Using this service, you can find ways to arbitrage for a profit.
+
 
 ## Authors:
 
