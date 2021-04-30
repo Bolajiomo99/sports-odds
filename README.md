@@ -11,17 +11,24 @@ This is a web app that gives live NBA odds data with game upsets featured on Gam
 
 ## Technologies used:
 
-*Javascript
-*Node and Express JS
-*JQuery and DOM manipulation
-*HTML & CSS
-*API
-*Google Cloud Platform (Firebase)
+* Javascript
+
+* Node and Express JS
+
+* JQuery and DOM manipulation
+
+* HTML & CSS
+
+* Sports Odds API
+
+* Google Cloud Platform (Firebase)
 
 ## Additional Features:
 
 * Gives codes that you can plug into pageprobe that you can check for live odd/spread changes.
+
 * Feature live sports odds using the live sports odds API to track for possible arbitrage
+
 * go [here](https://gambitprofit-306118.df.r.appspot.com/gamestoday)
 
 
