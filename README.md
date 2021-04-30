@@ -3,9 +3,20 @@
 ## INTRODUCTION
 This is a web app that gives live NBA odds data with game upsets featured on Gambit that you can access through Swagbucks.
 
-* [Current link](https://gambitprofit-306118.df.r.appspot.com)
-* [heroku link](http://gambitgames.herokuapp.com/) 
+## Websited hosted on:
 
+* [GCP (firebase) link](https://gambitprofit-306118.df.r.appspot.com)
+* [Heroku link](http://gambitgames.herokuapp.com/) 
+
+
+## Technologies used:
+
+*Javascript
+*Node and Express JS
+*JQuery and DOM manipulation
+*HTML & CSS
+*API
+*Google Cloud Platform (Firebase)
 
 ## Additional Features:
 
@@ -23,7 +34,7 @@ This is a web app that gives live NBA odds data with game upsets featured on Gam
 
 
 ## Run the website locally:
-* nodemon app.js
+* ```nodemon app.js```
 
 
 ## Why?:
