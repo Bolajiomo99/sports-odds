@@ -1,3 +1,4 @@
+//requirements
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -16,7 +17,7 @@ require('dotenv').config();
 //'mongodb://localhost:27017/yelp-camp'
 
 
-
+//MongoDB connection
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -41,6 +42,7 @@ app.use('/v1', route);
 
 
 // app.use(bodyParser);
+//set app to use the different directories for the views path and be able to use ejs files.
 app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
 app.set('views', [path.join(__dirname, 'views'),
@@ -60,7 +62,7 @@ const store = new MongoDBStore({
 
 
 
-
+//initialize the session for the brwoser to store information
 const sessionConfig = {
     store,
     name: 'session',
@@ -83,7 +85,7 @@ store.on("error", function(e){
     console.log('session store error', e)
 })
 
-
+// if current user is the session user move to next step
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     // res.locals.success = req.flash('success');
@@ -91,10 +93,10 @@ app.use((req, res, next) => {
     next();
 })
 
-
+//use the favicon for the website
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
-
+//if no user is in session, go to login path
 const requireLogin = (req, res, next) => {
     if (!req.session.user_id) {
         return res.redirect('/login')
@@ -102,7 +104,7 @@ const requireLogin = (req, res, next) => {
     next();
 }
 
-
+//root path
 app.get('/', (req, res) => {
     res.render('index');
 });
@@ -113,6 +115,8 @@ app.get('/register', (req, res) => {
     res.render('register')
 })
 
+
+//method to make a temporary password.
 makepass=(length) => {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -123,10 +127,11 @@ makepass=(length) => {
     return result;
  }
 
- 
+//forgot password path 
 app.get('/forgotpassword', (req, res) => {
     res.render('forgotpassword')
 })
+
 
 app.post('/forgotpassword', async (req, res) => {
     const { email } = req.body;
@@ -202,17 +207,17 @@ app.post('/forgotpassword', async (req, res) => {
     
 })
 
-
+//changing password
 app.get('/changepassword', (req,res) => {
     res.render('changepassword')
 })
 
-
+//nba odds path
 app.get('/nba', (req,res) => {
     res.render('nba')
 })
 
-
+//post request to register path
 app.post('/register', async (req, res) => {
     const { password, username, email, confirmPassword } = req.body;
     // const hash = awa
@@ -235,16 +240,18 @@ app.post('/register', async (req, res) => {
 })
 
 
-
+//login path
 app.get('/login', (req, res) => {
     res.render('login')
 })
 
+//logout post request to log out
 app.post('/logout', (req,res) => {
     req.session.user_id = null;
     res.redirect('/login')
 })
 
+//post request to login
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     console.log(req.body)
@@ -273,6 +280,7 @@ app.post('/login', async (req, res) => {
     
 })
 
+//post request to logout
 app.post('/logout', (req, res) => {
     // req.session.user_id = null;
     req.session.destroy();
@@ -280,7 +288,7 @@ app.post('/logout', (req, res) => {
     res.redirect('/login');
 })
 
-
+//shows the games for today on gambit
 app.get('/gamestoday', requireLogin, (req, res) => {
     // if (!req.session.user_id){
     //     res.redirect('/login')
@@ -288,6 +296,7 @@ app.get('/gamestoday', requireLogin, (req, res) => {
     res.render('gameoutput')
 })
 
+//testing
 app.get('/test', (req, res) => {
     res.send('nice, you found the testing page, but keep this a secret!  ;) ');
 });
@@ -296,19 +305,20 @@ app.get('/donate', (req, res) => {
     res.render('donate')
 });
 
+//separate page
 app.get('/profit', (req, res) => {
     res.render('profit');
 });
 
 
-
+//random page for testing
 app.get('/city', (req,res) => {
     res.render('city')
 })
 
 
 
-
+//catches all other pages if there's no end point found for the url.
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
 })
@@ -321,6 +331,7 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 4000;
 
+//listens to port 4000
 app.listen(port, () => {
     console.log('Serving on port 4000')
 })

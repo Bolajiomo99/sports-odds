@@ -10,6 +10,8 @@ const [
 //   return name.length > 3 && name.length <= 20 && /^[A-Za-z0-9_ ]*$/g.test(name);
 // }
 
+
+//check if email valid
 const isEmailValid = email => {
   return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g.test(email);
 }
@@ -18,6 +20,7 @@ const isPasswordValid = password => {
   return /^((?=.*[\d])(?=.*[a-z])(?=.*[A-Z])|(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s])|(?=.*[\d])(?=.*[A-Z])(?=.*[^\w\d\s])|(?=.*[\d])(?=.*[a-z])(?=.*[^\w\d\s])).{7,30}$/gm.test(password);
 }
 
+// check if password matches the password in database
 const isPasswordMatch = (password, confirmPassword) => {
   return !!confirmPassword && password === confirmPassword;
 }
@@ -30,6 +33,7 @@ const validation = (email, password, confirmPassword) => {
   );
 }
 
+//button to toggle password
 const toggleShowPassword = (toggler, elements) => {
   toggler.addEventListener('change', e => {
     elements.forEach(element => {
